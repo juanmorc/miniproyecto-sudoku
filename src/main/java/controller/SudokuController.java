@@ -1,3 +1,9 @@
+/**
+ * Controlador de la interfaz de usuario para el juego Sudoku.
+ * Maneja las interacciones del usuario y actualiza la vista según el modelo.
+ * @author Juan Moreno (2417575), Miguel Romero (2421802)
+ * @version 1.0
+ */
 package controller;
 
 import javafx.fxml.FXML;
@@ -13,11 +19,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuController {
+    /** GridPane que contiene las celdas del tablero Sudoku */
     @FXML
     private GridPane grid;
+    
+    /** Etiqueta para mostrar el título y mensajes del juego */
     @FXML
     private Label titleLabel;
+    
+    /** Modelo que contiene la lógica del juego Sudoku */
     private Sudoku sudokuModel;
+    
+    /**
+     * Método de inicialización que se llama automáticamente después de cargar el FXML.
+     * Configura el tablero de Sudoku y actualiza la interfaz de usuario.
+     */
     @FXML
     public void initialize() {
         System.out.println("Controlador inicializado");
@@ -32,6 +48,10 @@ public class SudokuController {
         updateUIFromModel();
     }
 
+    /**
+     * Configura el tablero de Sudoku con los estilos y listeners para cada celda.
+     * Maneja la validación de entrada y actualiza el modelo.
+     */
     private void setupSudokuBoard() {
         if (grid == null) {
             System.out.println("Error: No se ha podido vincular el GridPane 'grid'");
@@ -88,6 +108,11 @@ public class SudokuController {
         }
     }
 
+    /**
+     * Maneja el evento de finalización del juego Sudoku.
+     * Verifica si el tablero está completo y si la solución es correcta.
+     * @param event El evento de acción generado al hacer clic en el botón finalizar
+     */
     @FXML
     public void handleFinalizeSudoku(ActionEvent event) {
         System.out.println("Verificando solución del Sudoku...");
@@ -109,6 +134,10 @@ public class SudokuController {
         }
     }
 
+    /**
+     * Actualiza la interfaz de usuario a partir del estado actual del modelo.
+     * Establece los valores iniciales y configura los estilos de las celdas.
+     */
     private void updateUIFromModel() {
         int rowCount = 0;
         int colCount = 0;
@@ -152,6 +181,11 @@ public class SudokuController {
         }
     }
 
+    /**
+     * Oscurece un color hexadecimal para diferenciar las celdas iniciales.
+     * @param color El color base en formato hexadecimal
+     * @return El color oscurecido en formato hexadecimal
+     */
     private String darkenColor(String color) {
         if (color.equals("#F0F0F0")) {
             return "#D0D0D0"; // Versión más oscura del gris claro
@@ -160,6 +194,11 @@ public class SudokuController {
         }
     }
 
+    /**
+     * Maneja el evento de ayuda para el jugador.
+     * Busca una celda vacía y muestra los valores posibles para esa celda.
+     * @param event El evento de acción generado al hacer clic en el botón de ayuda
+     */
     @FXML
     public void handleHelp(ActionEvent event) {
         System.out.println("Mostrando ayuda para Sudoku...");
