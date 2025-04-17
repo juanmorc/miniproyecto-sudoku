@@ -1,9 +1,23 @@
+/**
+ * Clase que representa el modelo de un juego de Sudoku.
+ * Contiene la lógica del juego y el estado del tablero.
+ * Este Sudoku es de tamaño 6x6 con subgrillas de 2x3.
+ * @author Juan Moreno (2417575), Miguel Romero (2421802)
+ * @version 1.0
+ */
 package model;
 
 public class Sudoku {
+    /** Matriz que representa el tablero de Sudoku */
     private int[][] board;
+    
+    /** Tamaño del tablero de Sudoku (6x6) */
     private static final int SIZE = 6;
 
+    /**
+     * Constructor que inicializa un nuevo tablero de Sudoku vacío.
+     * Todas las celdas se inicializan a cero.
+     */
     public Sudoku() {
         board = new int[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {
@@ -13,10 +27,22 @@ public class Sudoku {
         }
     }
 
+    /**
+     * Obtiene el tamaño del tablero.
+     * @return El tamaño del tablero (6)
+     */
     public int getSize() {
         return SIZE;
     }
 
+    /**
+     * Verifica si un número es válido en una posición específica.
+     * Comprueba si el número no se repite en la fila, columna o subgrilla.
+     * @param row Fila donde se desea colocar el número
+     * @param col Columna donde se desea colocar el número
+     * @param num Número a verificar
+     * @return true si el número es válido en esa posición, false en caso contrario
+     */
     public boolean isValid(int row, int col, int num) {
         // Temporalmente removemos el valor actual para verificar
         int current = board[row][col];
@@ -30,6 +56,16 @@ public class Sudoku {
         return result;
     }
 
+    /**
+     * Método interno para verificar si un número es válido en una posición específica.
+     * Permite excluir una celda específica de la verificación.
+     * @param row Fila donde se desea colocar el número
+     * @param col Columna donde se desea colocar el número
+     * @param num Número a verificar
+     * @param checkRow Fila a excluir de la verificación (-1 si no se excluye ninguna)
+     * @param checkCol Columna a excluir de la verificación (-1 si no se excluye ninguna)
+     * @return true si el número es válido en esa posición, false en caso contrario
+     */
     public boolean isValid(int row, int col, int num, int checkRow, int checkCol) {
         // Verifica si el número ya existe en la fila
         for (int i = 0; i < SIZE; i++) {
@@ -62,14 +98,30 @@ public class Sudoku {
         return true;
     }
 
+    /**
+     * Establece un valor en una celda específica del tablero.
+     * @param row Fila de la celda
+     * @param col Columna de la celda
+     * @param value Valor a establecer
+     */
     public void setValue(int row, int col, int value) {
         board[row][col] = value;
     }
 
+    /**
+     * Obtiene el valor de una celda específica del tablero.
+     * @param row Fila de la celda
+     * @param col Columna de la celda
+     * @return El valor de la celda
+     */
     public int getValue(int row, int col) {
         return board[row][col];
     }
 
+    /**
+     * Verifica si el tablero está completamente lleno.
+     * @return true si todas las celdas tienen un valor distinto de cero, false en caso contrario
+     */
     public boolean isComplete() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -81,6 +133,10 @@ public class Sudoku {
         return true;
     }
 
+    /**
+     * Rellena el tablero con algunos valores iniciales aleatorios válidos.
+     * Coloca 2 números aleatorios en cada subgrilla.
+     */
     public void fillGrid() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -106,6 +162,12 @@ public class Sudoku {
         }
     }
 
+    /**
+     * Verifica si la solución del tablero es válida.
+     * Comprueba que no haya números repetidos en filas, columnas o subgrillas.
+     * @param board El tablero a verificar
+     * @return true si la solución es válida, false en caso contrario
+     */
     public boolean ValidSolution(int[][] board) {
         for (int i = 0; i < 6; i++) {
             boolean[] view = new boolean[7];
@@ -145,6 +207,10 @@ public class Sudoku {
         return true;
     }
 
+    /**
+     * Obtiene una copia del tablero actual.
+     * @return Una copia del tablero de Sudoku
+     */
     public int[][] getBoard(){
         int[][] copy = new int[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {
@@ -154,5 +220,4 @@ public class Sudoku {
         }
         return copy;
     }
-
 }
